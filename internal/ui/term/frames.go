@@ -1,12 +1,13 @@
 package term
 
 import (
+	"github.com/Codensell/RPG_CLI/internal/domain"
 	gc "github.com/rthornton128/goncurses"
 )
 
-func DrawFrames() {
+func DrawFrames(s domain.Stats) {
 	const frameH = 10
-	const logH   = frameH * 2
+	const logH = frameH * 2
 
 	std, err := gc.Init()
 	if err != nil {
@@ -33,17 +34,20 @@ func DrawFrames() {
 	}
 
 	playerY := 0
-	logY    := frameH
-	enemyY  := frameH + logH
+	logY := frameH
+	enemyY := frameH + logH
 
 	playerW, _ := gc.NewWindow(frameH, maxX, playerY, 0)
-	logW, _    := gc.NewWindow(logH,   maxX, logY,    0)
-	enemyW, _  := gc.NewWindow(frameH, maxX, enemyY,  0)
+	logW, _ := gc.NewWindow(logH, maxX, logY, 0)
+	enemyW, _ := gc.NewWindow(frameH, maxX, enemyY, 0)
 
-	playerW.Erase(); logW.Erase(); enemyW.Erase()
+	playerW.Erase()
+	logW.Erase()
+	enemyW.Erase()
 
 	playerW.Box(0, 0)
 	playerW.MovePrint(0, 2, " Player ")
+	DrawPlayerFrame(playerW, s)
 	playerW.Refresh()
 
 	logW.Box(0, 0)
