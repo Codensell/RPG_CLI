@@ -12,5 +12,6 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	p := domain.NewCharacter("Player")
+	_ = p.ApplyClassLevel(domain.ClassWarrior)
 	term.DrawFrames(p.CharacterData())
 }
