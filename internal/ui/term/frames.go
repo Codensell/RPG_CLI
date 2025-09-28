@@ -5,25 +5,14 @@ import (
 	gc "github.com/rthornton128/goncurses"
 )
 
-func DrawFrames(s domain.Stats) {
+func DrawFrames(std *gc.Window, s domain.Stats) {
 	const frameH = 10
 	const logH = frameH * 2
-
-	std, err := gc.Init()
-	if err != nil {
-		panic(err)
-	}
-	defer gc.End()
-
-	gc.Echo(false)
-	gc.Cursor(0)
-	gc.Raw(true)
 
 	std.Clear()
 	std.Refresh()
 
 	maxY, maxX := std.MaxYX()
-
 	totalH := frameH + logH + frameH
 	if totalH > maxY {
 		std.MovePrint(1, 2, "Terminal is too low")
@@ -38,12 +27,13 @@ func DrawFrames(s domain.Stats) {
 	enemyY := frameH + logH
 
 	playerW, _ := gc.NewWindow(frameH, maxX, playerY, 0)
+	defer playerW.Delete()
 	logW, _ := gc.NewWindow(logH, maxX, logY, 0)
+	defer logW.Delete()
 	enemyW, _ := gc.NewWindow(frameH, maxX, enemyY, 0)
+	defer enemyW.Delete()
 
-	playerW.Erase()
-	logW.Erase()
-	enemyW.Erase()
+	playerW.Erase(); logW.Erase(); enemyW.Erase()
 
 	playerW.Box(0, 0)
 	playerW.MovePrint(0, 2, " Player ")
