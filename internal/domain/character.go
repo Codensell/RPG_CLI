@@ -16,6 +16,15 @@ type Character struct {
 	LvlBarbarian int
 
 	Weapon Weapon
+
+	HasSneakAttack bool
+	HasPoison      bool
+
+	HasSurge   bool
+	HasShield  bool
+
+	HasRage      bool
+	HasStoneSkin bool
 }
 
 func (c *Character) CharacterData() Stats {
