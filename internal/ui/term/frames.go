@@ -5,7 +5,7 @@ import (
 	gc "github.com/rthornton128/goncurses"
 )
 
-func DrawFrames(std *gc.Window, s domain.Stats) {
+func DrawFrames(std *gc.Window, player domain.Stats, enemy domain.Stats) {
 	const frameH = 10
 	const logH = frameH * 2
 
@@ -37,7 +37,7 @@ func DrawFrames(std *gc.Window, s domain.Stats) {
 
 	playerW.Box(0, 0)
 	playerW.MovePrint(0, 2, " Player ")
-	DrawPlayerFrame(playerW, s)
+	DrawPlayerFrame(playerW, player)
 	playerW.Refresh()
 
 	logW.Box(0, 0)
@@ -46,6 +46,7 @@ func DrawFrames(std *gc.Window, s domain.Stats) {
 
 	enemyW.Box(0, 0)
 	enemyW.MovePrint(0, 2, " Enemy ")
+	DrawEnemyFrame(enemyW, enemy)
 	enemyW.MovePrint(frameH-2, 2, "Press any key to quit")
 	enemyW.Refresh()
 
