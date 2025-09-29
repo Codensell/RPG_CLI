@@ -10,7 +10,6 @@ type Character struct {
 	AGI   int
 	STA   int
 
-	// уровни для каждого класса так как в игре мультикласс
 	LvlRogue     int
 	LvlWarrior   int
 	LvlBarbarian int

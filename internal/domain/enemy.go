@@ -33,7 +33,6 @@ type Enemy struct {
 
 	TurnCounter int
 
-	// Лут/loot
 	Drop Weapon
 }
 
